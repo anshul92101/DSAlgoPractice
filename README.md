@@ -1,2 +1,2 @@
-# LeetCode
-Collection of LeetCode questions to ace the coding interview! - Created using [LeetHub](https://github.com/QasimWani/LeetHub)
+#DS Algo Practice Questions, on GeeksforGeeks and Leetcode
+Repo Maintained using Leethub plugin
