@@ -23,26 +23,25 @@ class Solution
        int pIndex = partition(arr,low,high);
        quickSort(arr,low,pIndex-1);
        quickSort(arr,pIndex+1,high);
+       
     }
     
     public:
     int partition (int arr[], int low, int high)
     {
        // Your code here
-       int pIndex=low;
+       int pIndex = low;
        int pivot = arr[high];
-       int i=low;
-       while(i<high){
-           
-           if(arr[i]>pivot) i++;
-           else{
-               swap(arr[i++],arr[pIndex++]);
+       int i = low;
+       for(i=low;i<=high;i++){
+           if(arr[i]<pivot){
+               swap(arr[i],arr[pIndex]);
+               pIndex++;
            }
-           
        }
        swap(arr[pIndex],arr[high]);
        return pIndex;
-    }  
+    }
 };
 
 
