@@ -1,20 +1,24 @@
+
+// sum equals to y at index k
+//we should check if we have seen y-k at a previous index i... i-1 to k will have sum == req_sum
+// 5 --> 10 , --> 10
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k){
         
-        vector<int> PSA; //an array to store the prefix sum
-        int N = nums.size();
-        unordered_map<int, int> freq; // stores the frequency of curSum-k
-        int curSum =0;
-        int count=0;
-        freq[curSum]=1;
-        for(int i=0;i<N;i++){
-            curSum+=nums[i];
-            if(freq.find(curSum-k)!=freq.end()){
-                count+= freq[curSum-k];
+        int sum=0, i,N = nums.size(),count=0;
+        unordered_map<int, int> mp;
+        mp[0] = 1;
+        for(i=0;i<N;i++){
+            
+            sum+=nums[i];
+            if(mp.find(sum-k)!= mp.end()){
+                count += mp[sum-k];
             }
-            freq[curSum]++;
+            mp[sum]++;
+            
         }
         return count;
+    
     }
 };
