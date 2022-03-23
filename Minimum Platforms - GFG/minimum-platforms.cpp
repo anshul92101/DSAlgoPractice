@@ -21,13 +21,14 @@ class Solution{
     	    
     	    if(arr[i]<=dep[j]){
     	        curPlatforms++;
+    	        maxPlatforms = max(maxPlatforms, curPlatforms);
     	        i++;
     	    }
     	    else{
     	        curPlatforms--;
     	        j++;
     	    }
-    	    maxPlatforms = max(maxPlatforms, curPlatforms);
+    	    
     	}
     	return maxPlatforms;
     }
