@@ -13,8 +13,8 @@ public:
         
         for(int i=1;i<=text1.size();i++){
             for(int j=1;j<=N;j++){
-                if(text1[i-1]==text2[j-1]) lcs[i%2][j] = 1 + lcs[(i+1)%2][(j-1)];
-                else lcs[i%2][j] = max(lcs[(i+1)%2][j],lcs[i%2][(j-1)]);
+                if(text1[i-1]==text2[j-1]) lcs[i%2][j] = 1 + lcs[(i-1)%2][(j-1)];
+                else lcs[i%2][j] = max(lcs[(i-1)%2][j],lcs[i%2][(j-1)]);
             }
         }
         
