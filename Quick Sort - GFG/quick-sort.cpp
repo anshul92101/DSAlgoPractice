@@ -27,22 +27,23 @@ class Solution
     }
     
     public:
-    int partition (int arr[], int low, int high)
-    {
-       // Your code here
-       int pIndex = low;
-       int pivot = arr[high];
-       int i = low;
-       for(i=low;i<=high;i++){
-           if(arr[i]<pivot){
-               swap(arr[i],arr[pIndex]);
-               pIndex++;
-           }
-       }
-       swap(arr[pIndex],arr[high]);
-       return pIndex;
+    int partition(int arr[], int low, int high){
+        
+        int pivot = arr[high];
+        int pIndex = low;
+        int i = low;
+        for(i=low;i<high;i++){
+            if(arr[i]<pivot){
+                swap(arr[i],arr[pIndex]);
+                pIndex++;
+            }
+        }
+        swap(arr[pIndex],arr[high]);
+        return pIndex;
     }
-};
+};  
+
+
 
 
 // { Driver Code Starts.
