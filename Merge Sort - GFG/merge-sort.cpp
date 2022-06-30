@@ -16,32 +16,28 @@ void printArray(int arr[], int size)
 
 
  // } Driver Code Ends
-
-
 class Solution
 {
     public:
     void merge(int arr[], int l, int m, int r)
     {
          // Your code here
-         if(l>=r) return;
-         int N = r-l+1;
          int temp[r-l+1];
-         int i=l,j=m+1,k=0;
-         while(i<=m && j<=r ){
+         int i=l;
+         int j=m+1;
+         int k =0;
+         while(i<=m && j<=r){
              if(arr[i]<arr[j]) temp[k++] = arr[i++];
              else temp[k++] = arr[j++];
-         }
-         
+         } 
          while(i<=m) temp[k++] = arr[i++];
          while(j<=r) temp[k++] = arr[j++];
-         
-         k=0;
-         while(k<N){
-             arr[l+k] = temp[k];
-             k++;
+    
+         for(int i=0;i<k;i++){
+            arr[l+i] = temp[i];     
          }
-         
+    
+        
     }
     public:
     void mergeSort(int arr[], int l, int r)
@@ -52,8 +48,7 @@ class Solution
         mergeSort(arr,l,mid);
         mergeSort(arr,mid+1,r);
         merge(arr,l,mid,r);
-        
-        
+    
     }
 };
 
