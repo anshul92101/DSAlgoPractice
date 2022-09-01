@@ -1,48 +1,30 @@
 class Solution {
 public:
-    
-    void processDescending(vector<int>& nums){
-        
-        int N = nums.size();
-        for(int i=0;i<N/2;i++){
-            
-            swap(nums[i],nums[N-i-1]);
-        
-        }
-        
-        
-    }
-    
     void nextPermutation(vector<int>& nums) {
-        
-        int N = nums.size();
-        int ind1 = -1, ind2;
-        for(int i=N-1;i>=1;i--){
-            
-            if(nums[i]>nums[i-1]){
-                ind1 = i-1;
+        // 0 1 2 5 3 3 0 
+        // 1 2 3
+        int n = nums.size();
+        int index1=-1, index2;
+        for(int i=n-2;i>=0;i--){
+            if(nums[i]<nums[i+1]){
+                index1 = i;
                 break;
             }
-            
         }
-       // cout<<"ind1 "<<ind1<<endl;
-        if(ind1==-1){
-            processDescending(nums);
+        if(index1==-1){
+            reverse(nums.begin(),nums.end());
             return;
-        }
+        };
         
-        for(int i=N-1;i>ind1;i--){
-            
-            if(nums[i]>nums[ind1]){
-                ind2 = i;
+        for(int i=n-1;i>index1;i--){
+            if(nums[i]>nums[index1]){
+                index2 = i;
                 break;
             }
-            
         }
-       // cout<<nums[ind1]<<" "<<nums[ind2]<<endl;
-        swap(nums[ind1],nums[ind2]);
-        if(ind1+1>=N) return;
-        else reverse(nums.begin()+(ind1+1), nums.end());
-        
+        swap(nums[index1],nums[index2]);
+        reverse(nums.begin()+index1+1, nums.end());
+        return;
+               
     }
 };
