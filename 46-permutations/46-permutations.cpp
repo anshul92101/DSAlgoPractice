@@ -1,35 +1,32 @@
 class Solution {
 public:
     
-    void getPermutations(int ind, vector<int> &nums, vector<vector<int>> &solution)     {
-        if(ind==nums.size()-1){
-            solution.push_back(nums);
+    void findPermutations(vector<int>& nums, int cid, vector<vector<int>>& sol){
+        
+        if(cid==nums.size()){
+            
+            sol.push_back(nums);
             return;
         }
-        
-        for(int i=ind;i<nums.size();i++){
             
-            swap(nums[ind],nums[i]);
-            getPermutations(ind+1,nums,solution);
-            swap(nums[ind],nums[i]);
+        int n = nums.size();
+        for(int i=cid;i<n;i++){
+            
+            swap(nums[i],nums[cid]);
+            findPermutations(nums,cid+1,sol);
+            swap(nums[i],nums[cid]);
             
         }
-        
-        
+
     }
-    
-    
     
     
     vector<vector<int>> permute(vector<int>& nums) {
         
-        vector<vector<int>> solution;
-        int N = nums.size();
-        getPermutations(0,nums,solution);
-        return solution;
-       
+        vector<vector<int>> sol;
+        int currIndex = 0;
+        findPermutations(nums,currIndex,sol);
+        return sol;
+    
     }
-    
-    
-    
 };
