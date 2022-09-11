@@ -1,49 +1,58 @@
 class Solution {
-private:
-    int count;
-    void checkCount(vector<int>& nums, int start, int mid, int end) {
-        int l = start, r = mid + 1;
-        while (l <= mid && r <= end){
-            if ((long) nums[l] > (long) 2 * nums[r]){
-                count += (mid - l + 1);
-                r++;
-            }else {
-                l++;
-            }
-        }
-        int a[end - start + 1], t = 0;
-        l = start, r = mid + 1;
-        while (l <= mid and r <= end) {
-            if (l <= mid and nums[l] < nums[r]) {
-                a[t++] = nums[l++];
-            } else {
-                a[t++] = nums[r++];
-            }
-        }
-        while (l <= mid) {
-            a[t++] = nums[l++];
-        }
-        while (r <= end) {
-            a[t++] = nums[r++];
-        }
-        for (int i = 0; i < end - start + 1; i++) {
-            nums[start + i] = a[i];
-        }
-        return;
-    }
-    void mergeSort(vector<int>& nums, int start, int end){
-        if(start == end) return;
-        int mid = (start + end)/2;
-        mergeSort(nums, start, mid);
-        mergeSort(nums, mid + 1,end);
-        checkCount(nums, start, mid, end);
-        return;
-    }
 public:
-    int reversePairs(vector<int>& nums) {
-        if (!nums.size()) return 0;
-        count = 0;
-        mergeSort(nums, 0, nums.size()-1);
+    
+    int merge(vector<int>& nums, int low, int high){
+        
+        int mid = low + (high-low)/2;
+        int i = low, j = mid+1;
+        int temp[high-low+1];
+        int k=0;
+        int count =0;
+        while(i<=mid && j<=high){
+            
+            if((long)nums[i]> (long) 2* nums[j]){
+                count+= mid-i+1;
+                j++;
+            }else{
+                i++;
+            }
+        }
+        i=low;
+        j=mid+1;
+        while(i<=mid && j<=high){
+            if(nums[i]<nums[j]) temp[k++] = nums[i++];
+            else temp[k++] = nums[j++];
+        }
+        while(i<=mid) temp[k++] = nums[i++];
+        while(j<=high) temp[k++] = nums[j++];
+        
+        for(int k=0;k<(high-low+1);k++){
+            nums[low+k] = temp[k];
+        }
         return count;
+    }
+    
+    
+    int mergeSort(vector<int>& nums, int low, int high){
+        
+        if(low>=high) return 0;
+        int count = 0;
+        int mid = low + (high-low)/2;
+        count+= mergeSort(nums,low,mid);
+        count+= mergeSort(nums,mid+1,high);
+        count+= merge(nums,low,high);        
+        
+        return count;
+    }
+    
+    int reversePairs(vector<int>& nums) {
+        
+        int low =0;
+        int high = nums.size()-1;
+        int sol = mergeSort(nums,low,high);
+        return sol;
+        
+        
+        
     }
 };
